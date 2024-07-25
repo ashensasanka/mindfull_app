@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "96225554793",
+    "project_id": "mindfullapp-48c7f",
+    "storage_bucket": "mindfullapp-48c7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96225554793:android:102da1e0482a4dcf95cdf8",
+        "android_client_info": {
+          "package_name": "com.example.mindful_momentum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZtN2DhYMOeGdmQlkM_y0m5bpqhS4n9l0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
