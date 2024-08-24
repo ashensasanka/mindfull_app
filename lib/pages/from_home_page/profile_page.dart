@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,24 +16,52 @@ class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
+
 List<List<String>> generateTableData() {
   List<List<String>> data = [];
 
   // Header row
-  data.add(['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+  data.add([
+    '',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ]);
 
   // List of subjects
-  final List<String> subjects = ['Study', 'Listen to Music', 'Work', 'Meditation', 'Exercise', 'Breathe'];
+  final List<String> subjects = [
+    'Study',
+    'Listen to Music',
+    'Work',
+    'Meditation',
+    'Exercise',
+    'Breathe'
+  ];
 
   // Shuffle subjects to randomize order
   subjects.shuffle();
 
   // Generate data for each row (time slots)
   List<String> timeSlots = [
-    '9.00 AM', '10.00 AM', '11.00 AM', '12.00 PM',
-    '1.00 PM', '2.00 PM', '3.00 PM', '4.00 PM',
-    '5.00 PM', '6.00 PM', '7.00 PM', '8.00 PM',
-    '9.00 PM', '10.00 PM', '11.00 PM'
+    '9.00 AM',
+    '10.00 AM',
+    '11.00 AM',
+    '12.00 PM',
+    '1.00 PM',
+    '2.00 PM',
+    '3.00 PM',
+    '4.00 PM',
+    '5.00 PM',
+    '6.00 PM',
+    '7.00 PM',
+    '8.00 PM',
+    '9.00 PM',
+    '10.00 PM',
+    '11.00 PM'
   ];
 
   for (int slotIndex = 0; slotIndex < timeSlots.length; slotIndex++) {
@@ -47,6 +76,7 @@ List<List<String>> generateTableData() {
 
   return data;
 }
+
 Future<void> generatePDF(BuildContext context) async {
   final pdf = pw.Document();
   final tableData = generateTableData();
@@ -96,6 +126,8 @@ Future<void> generatePDF(BuildContext context) async {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
   String? dropdownValue;
   String time = '';
   TextEditingController timeController = TextEditingController();
@@ -167,13 +199,28 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 120),
-                child: Text(
-                  'User Name',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 23,
-                    fontWeight: FontWeight.w400,
-                  ),
+                child: StreamBuilder<DocumentSnapshot>(
+                  stream:
+                      _firestore.collection('users').doc(user?.uid).snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    }
+                    final DocumentSnapshot document = snapshot.data!;
+                    final Map<String, dynamic> data =
+                        document.data() as Map<String, dynamic>;
+                    return Text(
+                      '${data['username']}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 23,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    );
+                  },
                 ),
               ),
               Text(
@@ -245,14 +292,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         filled: true,
                         fillColor: Color(0xffd9d9d9),
-                        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       ),
                     ),
                   ),
                 ],
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     // Check if timeController has a valid number
                     int? inputTime = int.tryParse(timeController.text);
@@ -316,14 +364,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         value: dropdownValue,
                         onChanged: (String? newValue) {
                           setState(
-                                () {
+                            () {
                               dropdownValue = newValue!;
                             },
                           );
                         },
                         items: <String>['Morning', 'Night']
                             .map<DropdownMenuItem<String>>(
-                              (String value) {
+                          (String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(
@@ -367,7 +415,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CustomTimetableScreen(time: dropdownValue,),
+                          builder: (context) => CustomTimetableScreen(
+                            time: dropdownValue,
+                          ),
                         ),
                       );
                     },
@@ -383,8 +433,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Center(
                         child: Text(
                           'Generate Time Table',
-                          style:
-                              TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),

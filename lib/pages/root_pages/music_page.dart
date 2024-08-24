@@ -151,25 +151,6 @@ class _MusicPageState extends State<MusicPage> {
                 ],
               ),
             ),
-            Container(
-              width: 150,
-              height: 55,
-              decoration: BoxDecoration(
-                color: Color(0xffcd95db),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  'SUBMIT',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
