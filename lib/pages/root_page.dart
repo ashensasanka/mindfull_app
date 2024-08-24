@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mindful_momentum/pages/root_pages/music_page.dart';
-import 'package:mindful_momentum/pages/root_pages/reminder_page.dart';
+import 'package:mindful_momentum/pages/root_pages/study_page.dart';
+import 'package:mindful_momentum/pages/root_pages/study_page.dart';
 
+import 'from_home_page/profile_page.dart';
 import 'root_pages/home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -17,6 +20,22 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff808080),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
+            },
+            child: Image.asset('assets/images/icon12.png'),
+          ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
@@ -69,11 +88,11 @@ class _RootPageState extends State<RootPage> {
         /// Home page
         HomePage(),
 
-        /// Notifications page
+        /// Music page
         MusicPage(),
 
-        /// Messages page
-        ReminderPage(),
+        /// Study page
+        StudyPage(),
 
         /// Translate page
         HomePage(),

@@ -75,9 +75,10 @@ class _BreathPageState extends State<BreathPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => BreathTech(
-                      title: 'Diaphragmatic Breathing',
+                      title: 'Alternate Nostril Breathing',
                       description:
-                          'Description: Diaphragmatic breathing involves fully engaging the stomach, abdominal muscles, and diaphragm when breathing. This technique helps increase lung capacity and promotes full oxygen exchange.',
+                          'How it Works: Close your right nostril with your thumb and inhale through your left nostril. Close your left nostril with your ring finger, open your right nostril, and exhale through the right side. Inhale through the right nostril, close it and exhale through the left. Continue alternating sides.\n\nWhy It’s Helpful for Students: Balances both sides of the brain, promoting calmness and mental clarity. It’s great for managing stress before starting a challenging task or project.\n\nDuration: 5-15 mins',
+                      imagePath: 'assets/images/breathing_1.jpeg',
                     ),
                   ),
                 );
@@ -114,9 +115,10 @@ class _BreathPageState extends State<BreathPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => BreathTech(
-                      title: 'Box Breathing',
+                      title: '4-7-8 Breathing',
                       description:
-                          'Description: Box breathing is a simple, structured breathing technique that involves breathing in, holding, exhaling, and holding again for equal counts. It\'s often used by athletes, military personnel, and individuals seeking to calm their mind.',
+                          'How it Works: Inhale quietly through your nose for 4 counts, hold your breath for 7 counts, and then exhale completely through your mouth for 8 counts. Repeat for 4 to 8 cycles.\n\nWhy It’s Helpful for Students: This technique helps manage stress and anxiety and can be particularly useful before bedtime to improve sleep quality during stressful periods.\n\nDuration: 10-20 mins',
+                      imagePath: 'assets/images/breathing_2.jpeg',
                     ),
                   ),
                 );
@@ -153,9 +155,10 @@ class _BreathPageState extends State<BreathPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => BreathTech(
-                      title: 'Alternate Nostril Breathing',
+                      title: 'Deep Diaphragmatic Breathing (Abdominal Breathing)',
                       description:
-                          'Description: Alternate nostril breathing is a yogic breath control practice that balances the left and right hemispheres of the brain. It\'s used to calm the mind and promote mental clarity.',
+                          'How it Works: Sit or lie down comfortably. Place one hand on your chest and the other on your abdomen. Take a deep breath through your nose, ensuring your abdomen rises more than your chest. Exhale slowly through your mouth.\n\nWhy It’s Helpful for Students: Activates the parasympathetic nervous system, which reduces stress and promotes relaxation. This technique is great for calming nerves before exams or presentations.\n\nDuration: 5-10 mins',
+                        imagePath: 'assets/images/breathing_3.jpeg'
                     ),
                   ),
                 );
@@ -192,9 +195,10 @@ class _BreathPageState extends State<BreathPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => BreathTech(
-                      title: '4-7-8 Breathing Technique',
+                      title: 'Alternate Nostril Breathing',
                       description:
-                          'Description: The 4-7-8 breathing technique is a powerful relaxation exercise that involves a specific pattern of inhaling, holding, and exhaling. It\'s particularly effective for reducing stress and improving sleep.',
+                      'How it Works: Close your right nostril with your thumb and inhale through your left nostril. Close your left nostril with your ring finger, open your right nostril, and exhale through the right side. Inhale through the right nostril, close it and exhale through the left. Continue alternating sides.\n\nWhy It’s Helpful for Students: Balances both sides of the brain, promoting calmness and mental clarity. It’s great for managing stress before starting a challenging task or project.\n\nDuration: 5-15 mins',
+                      imagePath: 'assets/images/breathing_1.jpeg',
                     ),
                   ),
                 );

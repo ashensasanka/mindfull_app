@@ -77,8 +77,8 @@ class _MedtechPageState extends State<MedtechPage> {
                     builder: (context) => MedTech(
                       title: 'Mindfulness Meditation',
                       description:
-                          'Description: Focuses on being present and fully engaged with the here and now. Practitioners pay attention to their thoughts, feelings, and sensations without judgment.\nBenefits: Reduces stress, enhances emotional regulation, improves focus and concentration.',
-                      imagePath: 'assets/images/icon10.png',
+                          'How it Works: Focus on the present moment, paying attention to your thoughts, feelings, and sensations without judgment.\n\nBenefits: Increases awareness of stress triggers, helps you stay grounded, and reduces the impact of stress.\n\nDuration: 5-10 mins per session',
+                      imagePath: 'assets/images/meditation.jpeg',
                     ),
                   ),
                 );
@@ -117,8 +117,8 @@ class _MedtechPageState extends State<MedtechPage> {
                     builder: (context) => MedTech(
                       title: 'Loving-Kindness Meditation',
                       description:
-                          'Description: Involves sending positive intentions and loving thoughts to oneself and others. Typically, practitioners repeat phrases like “May you be happy, may you be healthy, may you be safe.\nBenefits: Increases compassion, empathy, and overall sense of well-being.',
-                      imagePath: 'assets/images/icon18.png',
+                          'How it Works: Cultivate feelings of kindness and compassion toward yourself and others by silently repeating phrases like, "May I be happy. May I be healthy! May I be at peace."\n\nWhy It’s Helpful for Students: This practice helps combat negative self-talk and overwhelming feelings, promoting emotional well-being.\n\nDuration: 5-10 mins',
+                      imagePath: 'assets/images/meditation.jpeg',
                     ),
                   ),
                 );
@@ -154,9 +154,11 @@ class _MedtechPageState extends State<MedtechPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MedTech(title: 'Body Scan Meditation',
-                      description: 'Description: Involves paying attention to different parts of the body, usually starting from the toes and moving up to the head. Practitioners observe sensations without trying to change them.\nBenefits: Enhances body awareness, reduces stress, and promotes relaxation.',
-                      imagePath: 'assets/images/icon19.png',
+                    builder: (context) => MedTech(
+                      title: 'Body Scan Meditation',
+                      description:
+                          'Description: Involves paying attention to different parts of the body, usually starting from the toes and moving up to the head. Practitioners observe sensations without trying to change them.\n\nBenefits: Enhances body awareness, reduces stress, and promotes relaxation.',
+                      imagePath: 'assets/images/meditation.jpeg',
                     ),
                   ),
                 );
@@ -192,8 +194,11 @@ class _MedtechPageState extends State<MedtechPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MedTech(title: 'Guided Meditation', description: 'Description: Involves listening to a guide or instructor who leads the practitioner through a series of visualizations or instructions. Often uses apps, recordings, or live instructors.\nBenefits: Provides structure, helps beginners, and can be tailored for specific goals like relaxation or sleep.',
-                      imagePath: 'assets/images/icon20.png',
+                    builder: (context) => MedTech(
+                      title: 'Breath Awareness Meditation',
+                      description:
+                          'How it Works: Focus on your breathing, noticing the rhythm, depth, and sensations of each breath.\n\nBenefits: Simple yet effective in calming the mind, reducing stress, and improving focus.\n\nDuration: 10-15 mins',
+                      imagePath: 'assets/images/meditation.jpeg',
                     ),
                   ),
                 );

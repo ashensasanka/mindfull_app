@@ -1,17 +1,37 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mindful_momentum/pages/onboarding_page.dart';
 import 'package:mindful_momentum/pages/providers/chat_provider.dart';
 import 'package:mindful_momentum/pages/providers/responce_provider.dart';
+import 'package:mindful_momentum/utils/local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await LocalNotifications.init();
+
+  //  handle in terminated state
+  var initialNotification =
+  await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (initialNotification?.didNotificationLaunchApp == true) {
+    // LocalNotifications.onClickNotification.stream.listen((event) {
+    Future.delayed(Duration(seconds: 1), () {
+      // print(event);
+      navigatorKey.currentState!.pushNamed('/another',
+          arguments: initialNotification?.notificationResponse?.payload);
+    });
+  }
+
   runApp(MyApp());
 }
 

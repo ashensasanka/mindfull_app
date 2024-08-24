@@ -73,6 +73,7 @@ Future<void> generatePDF(BuildContext context) async {
       },
     ),
   );
+
   final directory = await getApplicationDocumentsDirectory();
   final path = '${directory.path}/example.pdf';
   final file = File(path);
@@ -95,6 +96,7 @@ Future<void> generatePDF(BuildContext context) async {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String? dropdownValue;
   String time = '';
   TextEditingController timeController = TextEditingController();
   TextEditingController freetimeController = TextEditingController();
@@ -291,6 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
+                    padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
                     height: 50,
                     width: 130,
                     decoration: BoxDecoration(
@@ -300,21 +303,74 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     child: Center(
-                      child: TextField(
-                        controller: freetimeController,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter free time here',
-                          hintStyle: TextStyle(color: Colors.grey),
+                      child: DropdownButtonFormField<String>(
+                        icon: Icon(
+                          Icons.arrow_drop_down_outlined,
+                          color: Colors.black,
                         ),
+                        hint: const Text(
+                          'Time',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        dropdownColor: Colors.white,
+                        value: dropdownValue,
+                        onChanged: (String? newValue) {
+                          setState(
+                                () {
+                              dropdownValue = newValue!;
+                            },
+                          );
+                        },
+                        items: <String>['Morning', 'Night']
+                            .map<DropdownMenuItem<String>>(
+                              (String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            );
+                          },
+                        ).toList(),
                       ),
                     ),
                   ),
+                  // Container(
+                  //   height: 50,
+                  //   width: 130,
+                  //   decoration: BoxDecoration(
+                  //     color: Color(0xffd9d9d9),
+                  //     borderRadius: BorderRadius.all(
+                  //       Radius.circular(20),
+                  //     ),
+                  //   ),
+                  //   child: Center(
+                  //     child: TextField(
+                  //       controller: freetimeController,
+                  //       keyboardType: TextInputType.number,
+                  //       textAlign: TextAlign.center,
+                  //       style: TextStyle(color: Colors.grey),
+                  //       decoration: InputDecoration(
+                  //         border: InputBorder.none,
+                  //         hintText: 'Enter free time here',
+                  //         hintStyle: TextStyle(color: Colors.grey),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   GestureDetector(
-                    onTap: () => generatePDF(context),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CustomTimetableScreen(time: dropdownValue,),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 55,
                       width: 200,

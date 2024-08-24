@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mindful_momentum/utils/local_notifications.dart';
 
 class MusicPage extends StatefulWidget {
   const MusicPage({super.key});
@@ -49,16 +52,24 @@ class _MusicPageState extends State<MusicPage> {
                 children: [
                   Column(
                     children: [
-                      Container(
-                        height: 60,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xffd9d9d9),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                      GestureDetector(
+                        onTap: () {
+                          LocalNotifications.showSimpleNotification(
+                              title: "Feedback",
+                              body: "Love Feedback Submitted",
+                              payload: "payload love feedback");
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Color(0xffd9d9d9),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
+                          child: Image.asset('assets/images/icon15.png'),
                         ),
-                        child: Image.asset('assets/images/icon15.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -73,16 +84,24 @@ class _MusicPageState extends State<MusicPage> {
                   ),
                   Column(
                     children: [
-                      Container(
-                        height: 60,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xffd9d9d9),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                      GestureDetector(
+                        onTap: () {
+                          LocalNotifications.showSimpleNotification(
+                              title: "Feedback",
+                              body: "Like Feedback Submitted",
+                              payload: "payload like feedback");
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Color(0xffd9d9d9),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
+                          child: Image.asset('assets/images/icon16.png'),
                         ),
-                        child: Image.asset('assets/images/icon16.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -97,16 +116,24 @@ class _MusicPageState extends State<MusicPage> {
                   ),
                   Column(
                     children: [
-                      Container(
-                        height: 60,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xffd9d9d9),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                      GestureDetector(
+                        onTap: () {
+                          LocalNotifications.showSimpleNotification(
+                              title: "Feedback",
+                              body: "Dislike Feedback Submitted",
+                              payload: "payload dislike feedback");
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            color: Color(0xffd9d9d9),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
+                          child: Image.asset('assets/images/icon17.png'),
                         ),
-                        child: Image.asset('assets/images/icon17.png'),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
