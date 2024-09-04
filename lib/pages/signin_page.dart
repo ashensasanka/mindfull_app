@@ -79,6 +79,41 @@ class _SignInPageState extends State<SignInPage> {
     }
   }
 
+  void emptyEmailMessage() {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Alert!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            content: const Text(
+              'Please fill Email & Password',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Retry'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
                       child: Icon(
-                        Icons.person,
+                        Icons.email,
                         color: Colors.white,
                         size: 35,
                       ),
@@ -121,7 +156,7 @@ class _SignInPageState extends State<SignInPage> {
                         controller: username,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Enter username:',
+                          hintText: 'Enter Your Email:',
                           hintStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -185,7 +220,12 @@ class _SignInPageState extends State<SignInPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  signUserIn();
+                  if (username.text.isEmpty || password.text.isEmpty)
+                    {
+                      emptyEmailMessage();
+                    } else {
+                    signUserIn();
+                  }
                 },
                 child: Container(
                     height: 60,

@@ -19,6 +19,55 @@ class _Add_screenState extends State<Add_screen> {
   FocusNode _focusNode3 = FocusNode();
   int indexx = 0;
 
+  void addTaskMessage() {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Add Task Successfully!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            content: const Text(
+              'Are you sure ?',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      int taskTimeValue = int.tryParse(taskTime.text)!*60 ?? 0;
+                      Firestore_Datasource().AddTask(subtitle.text, title.text, indexx, taskTimeValue);
+                      Firestore_Datasource()
+                          .AddTaskFirebase(subtitle.text, title.text, indexx, taskTimeValue);
+                      Navigator.pop(context);
+                    },
+                    child: Text('Ok'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel'),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +122,7 @@ class _Add_screenState extends State<Add_screen> {
             minimumSize: Size(170, 48),
           ),
           onPressed: () {
-            int taskTimeValue = int.tryParse(taskTime.text)!*60 ?? 0;
-            Firestore_Datasource().AddTask(subtitle.text, title.text, indexx, taskTimeValue);
-            Firestore_Datasource()
-                .AddTaskFirebase(subtitle.text, title.text, indexx, taskTimeValue);
-            Navigator.pop(context);
+            addTaskMessage();
           },
           child: Text(
             'Add Task',

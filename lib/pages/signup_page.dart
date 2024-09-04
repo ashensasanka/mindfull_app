@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mindful_momentum/pages/root_page.dart';
 
 import '../user_auth.dart';
 
@@ -16,6 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
   postDetailsToFirestore() async {
     var user = FirebaseAuth.instance.currentUser;
     CollectionReference new_users =
@@ -31,12 +33,20 @@ class _SignUpPageState extends State<SignUpPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => UserAuthPage(),
+        builder: (context) => RootPage(),
       ),
     );
   }
+
   void signUserUp() async {
-    //show loading circle
+    // Check if the password length is less than 6 characters
+    if (password.text.length < 6) {
+      // Show an error message
+      wrongEmailMessage("Password must be at least 6 characters long");
+      return;
+    }
+
+    // Show loading circle
     showDialog(
       context: context,
       builder: (context) {
@@ -45,9 +55,10 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       },
     );
-    // try creating the user
+
+    // Try creating the user
     try {
-      // check if password is confirmed
+      // Check if password is confirmed
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
         email: email.text,
@@ -56,31 +67,86 @@ class _SignUpPageState extends State<SignUpPage> {
           .then((value) => {postDetailsToFirestore()})
           .catchError((e) {});
 
-      // pop the loading circle
+      // Pop the loading circle
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      // pop the loading circle
+      // Pop the loading circle
       Navigator.pop(context);
-      // show error message
-      showErrorMesaage(e.code);
+      // Show error message
+      wrongEmailMessage(e.code);
     }
   }
-  void showErrorMesaage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.blueGrey,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.white),
+
+  void wrongEmailMessage(String error) {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Alert!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
             ),
-          ),
-        );
-      },
-    );
+            content: Text(
+              error,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Retry'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
+
+  void emptyEmailMessage() {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Alert!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            content: const Text(
+              'Please fill Email & Password',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Retry'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,13 +297,11 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  signUserUp();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => RootPage(),
-                  //   ),
-                  // );
+                  if (username.text.isEmpty || email.text.isEmpty || password.text.isEmpty) {
+                    emptyEmailMessage();
+                  } else {
+                    signUserUp();
+                  }
                 },
                 child: Container(
                   height: 60,

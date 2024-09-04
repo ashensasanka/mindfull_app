@@ -77,53 +77,6 @@ List<List<String>> generateTableData() {
   return data;
 }
 
-Future<void> generatePDF(BuildContext context) async {
-  final pdf = pw.Document();
-  final tableData = generateTableData();
-  pdf.addPage(
-    pw.Page(
-      build: (pw.Context context) {
-        return pw.Column(
-          children: [
-            pw.Center(
-              child: pw.Text(
-                'MINDFUL MOMENTUM',
-                style: pw.TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            pw.SizedBox(height: 20), // Add some space between text and table
-            pw.Table.fromTextArray(
-              headers: tableData.first,
-              data: tableData.sublist(1),
-            ),
-          ],
-        );
-      },
-    ),
-  );
-
-  final directory = await getApplicationDocumentsDirectory();
-  final path = '${directory.path}/example.pdf';
-  final file = File(path);
-  await file.writeAsBytes(await pdf.save());
-  showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: Text('PDF Generated'),
-      content: Text('PDF has been saved to $path'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text('OK'),
-        ),
-      ],
-    ),
-  );
-}
 
 class _ProfilePageState extends State<ProfilePage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -137,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 70),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 50),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -232,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Container(
-                height: 250,
+                height: 290,
                 width: 350,
                 decoration: BoxDecoration(
                   color: Color(0xffd9d9d9),

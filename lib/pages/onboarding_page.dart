@@ -17,7 +17,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     // TODO: implement initState
     super.initState();
     Timer(
-      Duration(seconds: 5),
+      Duration(seconds: 55),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (BuildContext context) => UserAuthPage(),
