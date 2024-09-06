@@ -73,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // Pop the loading circle
       Navigator.pop(context);
       // Show error message
-      wrongEmailMessage(e.code);
+      wrongEmailMessage("e.code");
     }
   }
 

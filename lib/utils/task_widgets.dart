@@ -73,11 +73,11 @@ class _Task_WidgetState extends State<Task_Widget> {
                           activeColor: Color(0xff638889),
                           value: isDone,
                           onChanged: (value) {
-                            setState(() {
-                              isDone = !isDone;
-                            });
-                            Firestore_Datasource()
-                                .isdone(widget._tasks.id, isDone);
+                            // setState(() {
+                            //   isDone = !isDone;
+                            // });
+                            // Firestore_Datasource()
+                            //     .isdone(widget._tasks.id, isDone);
                           },
                         )
                       ],

@@ -56,6 +56,8 @@ class _TimerPageState extends State<TimerPage> {
         body: "Task Completed !",
         payload: "Payload data",
       );
+      Firestore_Datasource()
+          .isdone(widget.uuid, true);
     }
 
     setState(() => timer?.cancel());
