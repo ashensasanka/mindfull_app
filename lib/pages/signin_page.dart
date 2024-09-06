@@ -38,9 +38,7 @@ class _SignInPageState extends State<SignInPage> {
       );
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'invalid-credential') {
-        wrongEmailMessage();
-      }
+      wrongEmailMessage();
     }
   }
 
